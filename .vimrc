@@ -1,22 +1,77 @@
-syntax on               " syntax highlighting
-set backspace=2         " backspace in insert mode works like normal editor
-set t_Co=256            " set terminal to use 256 colors
-colorscheme onedark     " setting up vim colours
-filetype indent on      " activates indenting for files
-set autoindent          " auto indenting
-set number              " line numbers
-set nobackup            " get rid of anoying ~file
-set showmode            " show current mode
-set hlsearch            " highlight search
-set autoindent          " automatic indentation
-set shiftwidth=2        " set shifts to 2 spaces
-set tabstop=2           " set tab to 2 spaces
-set softtabstop=2       " number of spaces in tab when editing
-set expandtab           " tabs are spaces
-set showcmd             " show command in bottom bar
-set cursorline         " highlight current line
-set wildmenu            " visual autocomplete for command menu
-set lazyredraw          " redraw only when we need to
-set showmatch           " highlight matching bracket
-set laststatus=2        " enabling airline by default
-set noshowmode          " disabling default show mode
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+" Regular Loading
+Plug 'tpope/vim-fugitive'
+Plug 'hashivim/vim-packer'
+Plug 'hashivim/vim-terraform'
+Plug 'townk/vim-autoclose'
+Plug 'airblade/vim-gitgutter'
+Plug 'kien/ctrlp.vim'
+Plug 'miyakogi/conoline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'sickill/vim-monokai'
+Plug 'bronson/vim-trailing-whitespace'
+
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'hashivim/vim-vagrant', { 'for': 'ruby' }
+
+" Initialize plugin system
+call plug#end()
+" map NERD Tree
+map <C-n> :NERDTreeToggle<CR>
+map <C-p> :CtrlP<CR>
+" remap splits navigation
+let mapleader = "\<Space>"
+nnoremap <Leader>j <C-W><C-J>
+nnoremap <Leader>k <C-W><C-K>
+nnoremap <Leader>l <C-W><C-L>
+nnoremap <Leader>h <C-W><C-H>
+
+set nocompatible
+set background=dark
+colorscheme monokai
+
+
+let g:xml_syntax_folding = 1
+let g:conoline_auto_enable = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='molokai'
+syntax on
+filetype plugin on
+set nofoldenable
+
+"history and backup
+set history=50
+set backup
+set backupdir=~/.vim/vimbackup/
+set directory=~/.vim/vimswaps/
+
+"tabs
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set noexpandtab
+"end tabs
+set formatoptions=t
+set encoding=utf-8
+set hlsearch
+set incsearch
+set visualbell
+set noerrorbells
+"editor
+set number
+set ruler
+set cursorline
+set autoindent
+set smartindent
+set whichwrap=<,>,h,l
+set backspace=2
+set wildmenu
+" matching brackets
+set showmatch
+set matchtime=3
+"Remove all trailing whitespace by pressing F2
+nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
